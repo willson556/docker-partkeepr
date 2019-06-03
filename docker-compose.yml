@@ -3,6 +3,7 @@ services:
 
   partkeepr:
     image: mhubig/partkeepr:latest
+    restart: always
     environment:
       - PARTKEEPR_DATABASE_HOST=database
       - PARTKEEPR_DATABASE_NAME=partkeepr
@@ -11,24 +12,32 @@ services:
       - PARTKEEPR_DATABASE_PASS=partkeepr
       - PARTKEEPR_OKTOPART_APIKEY
     ports:
-      - "80:80"
+      - "8001:80"
     volumes:
-      - partkeepr-data:/var/www/html/data
-      - partkeepr-web:/var/www/html/web
+      - /docker-data/partkeepr/html-data:/var/www/html/data
+      - /docker-data/partkeepr/html-web:/var/www/html/web
     depends_on:
       - database
 
-  database:
+  partkeepr-database:
     image: mariadb:10.3
+    restart: always
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=partkeepr
       - MYSQL_USER=partkeepr
       - MYSQL_PASSWORD=partkeepr
     volumes:
-      - mysql-data:/var/lib/mysql
-
-volumes:
-  partkeepr-data:
-  partkeepr-web:
-  mysql-data:
+      - /docker-data/partkeepr/mysql:/var/lib/mysql
+  
+  partkeepr-database-backup:
+    image: databack/mysql-backup
+    restart: always
+    volumes: /media/psf/PartKeepr-Backup:/db
+    depends_on:
+      - database
+    environment:
+      - DB_DUMP_TARGET=/db
+      - DB_USER=partkeepr
+      - DB_PASS=partkeepr
+      - DB_SERVER=database
