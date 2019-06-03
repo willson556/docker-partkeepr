@@ -14,8 +14,8 @@ services:
     ports:
       - "8001:80"
     volumes:
-      - /docker-data/partkeepr/html-data:/var/www/html/data
-      - /docker-data/partkeepr/html-web:/var/www/html/web
+      - partkeepr-data:/var/www/html/data
+      - partkeepr-web:/var/www/html/web
     depends_on:
       - partkeepr-database
 
@@ -42,3 +42,6 @@ services:
       - DB_USER=partkeepr
       - DB_PASS=partkeepr
       - DB_SERVER=database
+volumes:
+  partkeepr-data:
+  partkeepr-web:
