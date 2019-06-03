@@ -17,7 +17,7 @@ services:
       - /docker-data/partkeepr/html-data:/var/www/html/data
       - /docker-data/partkeepr/html-web:/var/www/html/web
     depends_on:
-      - database
+      - partkeepr-database
 
   partkeepr-database:
     image: mariadb:10.3
@@ -36,7 +36,7 @@ services:
     volumes:
       - /media/psf/PartKeepr-Backup:/db
     depends_on:
-      - database
+      - partkeepr-database
     environment:
       - DB_DUMP_TARGET=/db
       - DB_USER=partkeepr
