@@ -5,7 +5,7 @@ services:
     image: mhubig/partkeepr:latest
     restart: always
     environment:
-      - PARTKEEPR_DATABASE_HOST=database
+      - PARTKEEPR_DATABASE_HOST=partkeepr-database
       - PARTKEEPR_DATABASE_NAME=partkeepr
       - PARTKEEPR_DATABASE_PORT=3306
       - PARTKEEPR_DATABASE_USER=partkeepr
