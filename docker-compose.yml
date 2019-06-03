@@ -41,7 +41,7 @@ services:
       - DB_DUMP_TARGET=/db
       - DB_USER=partkeepr
       - DB_PASS=partkeepr
-      - DB_SERVER=database
+      - DB_SERVER=partkeepr-database
 volumes:
   partkeepr-data:
   partkeepr-web:
