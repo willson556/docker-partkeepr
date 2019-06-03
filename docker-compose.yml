@@ -20,7 +20,7 @@ services:
       - partkeepr-database
 
   partkeepr-database:
-    image: mariadb:10.3
+    image: mariadb:10.0
     restart: always
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
